@@ -4,27 +4,29 @@ function ToyCard({ toy, deleteToy, updateToy }) {
   function handleDelete() {
     fetch(`http://localhost:6001/toys/${toy.id}`, {
       method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then(() => {
-        deleteToy(toy.id);
-      });
+    }).then(() => {
+      deleteToy(toy.id);
+    });
   }
+  
 
   function handleLike() {
+    const newLikes = toy.likes + 1;
+  
     fetch(`http://localhost:6001/toys/${toy.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        likes: toy.likes + 1,
+        likes: newLikes,
       }),
-    })
-      .then((response) => response.json())
-      .then((updatedToy) => {
-        updateToy(updatedToy);
+    }).then(() => {
+      updateToy({
+        ...toy,
+        likes: newLikes,
       });
+    });
   }
 
   return (
@@ -37,7 +39,7 @@ function ToyCard({ toy, deleteToy, updateToy }) {
         className="toy-avatar"
       />
 
-      <p>{toy.likes} Likes</p>
+      <p>{toy.likes} Likes </p>
 
       <button className="like-btn" onClick={handleLike}>
         Like {"<3"}

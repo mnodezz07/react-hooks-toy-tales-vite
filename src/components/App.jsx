@@ -18,6 +18,14 @@ function App() {
       .then((data) => setToys(data));
   }, []);
 
+  function updateToy(updatedToy) {
+    setToys((currentToys) =>
+      currentToys.map((toy) =>
+        toy.id === updatedToy.id ? updatedToy : toy
+      )
+    );
+  }
+
   function addToy(newToy) {
     setToys((currentToys) => [...currentToys, newToy]);
   }
