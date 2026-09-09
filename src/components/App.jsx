@@ -55,7 +55,10 @@ function App() {
         <button onClick={handleClick}>Add a Toy</button>
       </div>
 
-      <ToyContainer toys={toys} />
+      <ToyContainer toys={toys} 
+                    deleteToy={deleteToy}
+                    updateToy={updateToy}
+       />
     </>
   );
 }

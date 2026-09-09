@@ -8,24 +8,23 @@ function ToyCard({ toy, deleteToy, updateToy }) {
       deleteToy(toy.id);
     });
   }
-  
 
   function handleLike() {
-    const newLikes = toy.likes + 1;
-  
+    const updatedToy = {
+      ...toy,
+      likes: toy.likes + 1,
+    };
+
     fetch(`http://localhost:6001/toys/${toy.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        likes: newLikes,
+        likes: updatedToy.likes,
       }),
     }).then(() => {
-      updateToy({
-        ...toy,
-        likes: newLikes,
-      });
+      updateToy(updatedToy);
     });
   }
 
