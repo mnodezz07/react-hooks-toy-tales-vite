@@ -22,6 +22,21 @@ function App() {
     setToys((currentToys) => [...currentToys, newToy]);
   }
 
+  function deleteToy(id) {
+    setToys((currentToys) =>
+      currentToys.filter((toy) => toy.id !== id)
+    );
+  }
+
+
+  function updateToy(updatedToy) {
+    setToys((currentToys) =>
+      currentToys.map((toy) =>
+        toy.id === updatedToy.id ? updatedToy : toy
+      )
+    );
+  }
+
   return (
     <>
       <Header />
